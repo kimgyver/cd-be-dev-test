@@ -19,15 +19,29 @@ function getSqlJs(): Promise<SqlJsStatic> {
   return sqlPromise as Promise<SqlJsStatic>;
 }
 
+function resolveDbPath(): string {
+  const moduleDir = path.dirname(new URL(import.meta.url).pathname);
+  const candidates = [
+    path.join(process.cwd(), "data", "customers.db"),
+    path.join(process.cwd(), ".vercel", "output", "functions", "api", "customers.func", "data", "customers.db"),
+    path.resolve(moduleDir, "..", "..", "data", "customers.db"),
+    path.resolve(moduleDir, "..", "..", "..", "data", "customers.db")
+  ];
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  throw new Error("Database file not found. Run: npm run import");
+}
+
 export async function getDb(): Promise<Database> {
   if (!dbPromise) {
     dbPromise = (async () => {
       const SQL = await getSqlJs();
-      const dbPath = path.join(process.cwd(), "data", "customers.db");
-
-      if (!fs.existsSync(dbPath)) {
-        throw new Error("Database file not found. Run: npm run import");
-      }
+      const dbPath = resolveDbPath();
 
       const fileBuffer = fs.readFileSync(dbPath);
       return new SQL.Database(fileBuffer);

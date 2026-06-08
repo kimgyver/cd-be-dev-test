@@ -1,12 +1,25 @@
 async function requestJson(url, options) {
   const res = await fetch(url, options);
-  const data = await res.json();
+  const text = await res.text();
+  const data = text ? safeParseJson(text) : {};
 
   if (!res.ok) {
-    throw new Error(data.error || "Request failed");
+    const message =
+      (data && typeof data === "object" && data.error) ||
+      (typeof text === "string" ? text : "") ||
+      "Request failed";
+    throw new Error(String(message));
   }
 
   return data;
+}
+
+function safeParseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
 }
 
 function buildListQuery({ page, limit, q }) {
