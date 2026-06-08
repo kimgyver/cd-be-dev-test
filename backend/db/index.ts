@@ -7,9 +7,12 @@ let dbPromise: Promise<Database> | null = null;
 
 function getSqlJs(): Promise<SqlJsStatic> {
   if (!sqlPromise) {
+    const wasmPath = process.env.VERCEL
+      ? "https://sql.js.org/dist/sql-wasm.wasm"
+      : path.join(process.cwd(), "node_modules", "sql.js", "dist", "sql-wasm.wasm");
+
     sqlPromise = initSqlJs({
-      locateFile: (file: string) =>
-        path.join(process.cwd(), "node_modules", "sql.js", "dist", file)
+      locateFile: () => wasmPath
     });
   }
 

@@ -3,10 +3,7 @@
   "functions": {
     "api/customers.ts": {
       "runtime": "nodejs20.x",
-      "includeFiles": [
-        "data/customers.db",
-        "node_modules/sql.js/dist/sql-wasm.wasm"
-      ]
+      "includeFiles": "data/customers.db"
     }
   },
   "rewrites": [
