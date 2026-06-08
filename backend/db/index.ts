@@ -1,29 +1,35 @@
 import fs from "node:fs";
 import path from "node:path";
-import initSqlJs, { type Database, type SqlJsStatic } from "sql.js";
+import { fileURLToPath } from "node:url";
+import initSqlJs from "sql.js/dist/sql-asm.js";
+import type { Database, SqlJsStatic } from "sql.js";
 
 let sqlPromise: Promise<SqlJsStatic> | null = null;
 let dbPromise: Promise<Database> | null = null;
 
 function getSqlJs(): Promise<SqlJsStatic> {
   if (!sqlPromise) {
-    const wasmPath = process.env.VERCEL
-      ? "https://sql.js.org/dist/sql-wasm.wasm"
-      : path.join(process.cwd(), "node_modules", "sql.js", "dist", "sql-wasm.wasm");
-
-    sqlPromise = initSqlJs({
-      locateFile: () => wasmPath
-    });
+    // Use asm build to avoid wasm file resolution/network issues in serverless.
+    sqlPromise = initSqlJs() as Promise<SqlJsStatic>;
   }
 
   return sqlPromise as Promise<SqlJsStatic>;
 }
 
 function resolveDbPath(): string {
-  const moduleDir = path.dirname(new URL(import.meta.url).pathname);
+  const moduleDir = path.dirname(fileURLToPath(import.meta.url));
   const candidates = [
     path.join(process.cwd(), "data", "customers.db"),
-    path.join(process.cwd(), ".vercel", "output", "functions", "api", "customers.func", "data", "customers.db"),
+    path.join(
+      process.cwd(),
+      ".vercel",
+      "output",
+      "functions",
+      "api",
+      "customers.func",
+      "data",
+      "customers.db"
+    ),
     path.resolve(moduleDir, "..", "..", "data", "customers.db"),
     path.resolve(moduleDir, "..", "..", "..", "data", "customers.db")
   ];
