@@ -188,3 +188,7 @@ Note: `PUT` and `DELETE` in this demo update the in-memory DB instance of the ru
 - Security: user inputs are validated for pagination and sorting parameters.
 - Performance: indexed `email`, pagination with `LIMIT/OFFSET`, and read-only SQLite for low ops overhead.
 - Accessibility: semantic HTML, responsive layout, keyboard search (`Enter`) support.
+
+## Hosted in Vercel
+
+https://cd-be-dev-test-zds9-git-main-kimgyvers-projects.vercel.app/
