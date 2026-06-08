@@ -10,5 +10,10 @@
     "types": ["node"],
     "allowSyntheticDefaultImports": true
   },
-  "include": ["backend/**/*.ts", "scripts/**/*.ts", "tests/**/*.ts"]
+  "include": [
+    "api/**/*.ts",
+    "backend/**/*.ts",
+    "scripts/**/*.ts",
+    "tests/**/*.ts"
+  ]
 }
