@@ -2,7 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/customers.ts": {
-      "runtime": "nodejs20.x",
       "includeFiles": "data/customers.db"
     }
   },
