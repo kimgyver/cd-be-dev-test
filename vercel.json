@@ -1,0 +1,42 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/customers.ts": {
+      "runtime": "nodejs20.x",
+      "includeFiles": [
+        "data/customers.db",
+        "node_modules/sql.js/dist/sql-wasm.wasm"
+      ]
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/frontend/index.html"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/frontend/styles.css"
+    },
+    {
+      "source": "/api.js",
+      "destination": "/frontend/api.js"
+    },
+    {
+      "source": "/useCustomers.js",
+      "destination": "/frontend/useCustomers.js"
+    },
+    {
+      "source": "/CustomerEditor.jsx",
+      "destination": "/frontend/CustomerEditor.jsx"
+    },
+    {
+      "source": "/CustomerItem.jsx",
+      "destination": "/frontend/CustomerItem.jsx"
+    },
+    {
+      "source": "/app.jsx",
+      "destination": "/frontend/app.jsx"
+    }
+  ]
+}

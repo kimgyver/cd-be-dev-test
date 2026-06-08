@@ -1,0 +1,27 @@
+{
+  "name": "be-dev-test",
+  "version": "1.0.0",
+  "description": "Backend dev test solution with SQLite import, paginated API, and async web client",
+  "type": "module",
+  "scripts": {
+    "import": "tsx scripts/import-customers.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:watch": "tsx --test --watch tests/*.test.ts",
+    "dev": "tsx scripts/local-server.ts",
+    "dev:vercel": "npx vercel dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^6.2.1",
+    "sql.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "@types/sql.js": "^1.4.11",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}
