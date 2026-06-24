@@ -5,34 +5,12 @@
       "includeFiles": "data/customers.db"
     }
   },
+  "buildCommand": "mkdir -p public && cp frontend/* public/",
+  "outputDirectory": "public",
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/frontend/index.html"
-    },
-    {
-      "source": "/styles.css",
-      "destination": "/frontend/styles.css"
-    },
-    {
-      "source": "/api.js",
-      "destination": "/frontend/api.js"
-    },
-    {
-      "source": "/useCustomers.js",
-      "destination": "/frontend/useCustomers.js"
-    },
-    {
-      "source": "/CustomerEditor.jsx",
-      "destination": "/frontend/CustomerEditor.jsx"
-    },
-    {
-      "source": "/CustomerItem.jsx",
-      "destination": "/frontend/CustomerItem.jsx"
-    },
-    {
-      "source": "/app.jsx",
-      "destination": "/frontend/app.jsx"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
