@@ -24,7 +24,17 @@ function contentType(filePath: string): string {
 
 function servePublic(req: IncomingMessage, res: ServerResponse): void {
   const url = new URL(req.url ?? "/", "http://localhost");
-  const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
+  
+  // Serve index.html for root
+  if (url.pathname === "/" || url.pathname === "/index.html") {
+    const html = fs.readFileSync(path.join(PUBLIC_DIR, "index.html"), "utf-8");
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.end(html);
+    return;
+  }
+  
+  const pathname = url.pathname;
   const safePath = path.normalize(pathname).replace(/^\.+/, "");
   const target = path.join(PUBLIC_DIR, safePath);
 

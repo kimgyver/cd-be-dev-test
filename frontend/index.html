@@ -19,15 +19,14 @@
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
     ></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Load order: plain JS helpers first, then JSX components -->
+    <!-- Load order: plain JS helpers first, then components -->
     <script src="/api.js"></script>
-    <script src="/useCustomers.js" type="text/babel"></script>
-    <script src="/CustomerEditor.jsx" type="text/babel"></script>
-    <script src="/CustomerItem.jsx" type="text/babel"></script>
-    <script src="/app.jsx" type="text/babel"></script>
+    <script src="/useCustomers.js"></script>
+    <script src="/CustomerEditor.js"></script>
+    <script src="/CustomerItem.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
