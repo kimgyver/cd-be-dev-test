@@ -1,11 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "mkdir -p public && cp -r frontend/* public/",
+  "outputDirectory": "public",
   "functions": {
     "api/customers.ts": {
       "includeFiles": "data/customers.db"
     }
   },
-  "buildCommand": "mkdir -p public && cp -r frontend/* public/",
   "rewrites": [
     {
       "source": "/((?!api).)*",
