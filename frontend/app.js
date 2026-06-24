@@ -76,11 +76,25 @@ setTimeout(() => {
 
     const listItems = [];
     if (loading) {
-      listItems.push(React.createElement("li", { className: "status", key: "loading" }, "Loading..."));
+      listItems.push(
+        React.createElement(
+          "li",
+          { className: "status", key: "loading" },
+          "Loading..."
+        )
+      );
     } else if (error) {
-      listItems.push(React.createElement("li", { className: "status", key: "error" }, error));
+      listItems.push(
+        React.createElement("li", { className: "status", key: "error" }, error)
+      );
     } else if (items.length === 0) {
-      listItems.push(React.createElement("li", { className: "status", key: "empty" }, "No customers found."));
+      listItems.push(
+        React.createElement(
+          "li",
+          { className: "status", key: "empty" },
+          "No customers found."
+        )
+      );
     } else {
       items.forEach(item => {
         const isEditing = editingId === item.id;
@@ -88,7 +102,11 @@ setTimeout(() => {
           React.createElement(
             "li",
             { className: "item", key: item.id },
-            React.createElement("span", { className: "name" }, `${item.first_name} ${item.last_name}`),
+            React.createElement(
+              "span",
+              { className: "name" },
+              `${item.first_name} ${item.last_name}`
+            ),
             React.createElement("span", { className: "line" }, item.email),
             React.createElement(
               "span",
@@ -102,19 +120,34 @@ setTimeout(() => {
                   React.createElement(
                     "div",
                     { className: "row-edit" },
-                    ["first_name", "last_name", "email", "company", "city", "title"].map(key =>
+                    [
+                      "first_name",
+                      "last_name",
+                      "email",
+                      "company",
+                      "city",
+                      "title"
+                    ].map(key =>
                       React.createElement(
                         "div",
                         { key, className: "edit-field" },
                         React.createElement(
                           "label",
                           null,
-                          key === "first_name" ? "First name" : key === "last_name" ? "Last name" : key.charAt(0).toUpperCase() + key.slice(1)
+                          key === "first_name"
+                            ? "First name"
+                            : key === "last_name"
+                              ? "Last name"
+                              : key.charAt(0).toUpperCase() + key.slice(1)
                         ),
                         React.createElement("input", {
                           type: "text",
                           value: draft[key] || "",
-                          onChange: e => setDraft(prev => ({ ...prev, [key]: e.target.value }))
+                          onChange: e =>
+                            setDraft(prev => ({
+                              ...prev,
+                              [key]: e.target.value
+                            }))
                         })
                       )
                     )
@@ -122,15 +155,37 @@ setTimeout(() => {
                   React.createElement(
                     "div",
                     { className: "row-actions" },
-                    React.createElement("button", { onClick: () => saveEdit(item.id) }, "Save"),
-                    React.createElement("button", { className: "secondary", onClick: () => { setEditingId(null); setDraft({}); } }, "Cancel")
+                    React.createElement(
+                      "button",
+                      { onClick: () => saveEdit(item.id) },
+                      "Save"
+                    ),
+                    React.createElement(
+                      "button",
+                      {
+                        className: "secondary",
+                        onClick: () => {
+                          setEditingId(null);
+                          setDraft({});
+                        }
+                      },
+                      "Cancel"
+                    )
                   )
                 )
               : React.createElement(
                   "div",
                   { className: "row-actions" },
-                  React.createElement("button", { onClick: () => beginEdit(item) }, "Edit"),
-                  React.createElement("button", { className: "warn", onClick: () => handleDelete(item.id) }, "Delete")
+                  React.createElement(
+                    "button",
+                    { onClick: () => beginEdit(item) },
+                    "Edit"
+                  ),
+                  React.createElement(
+                    "button",
+                    { className: "warn", onClick: () => handleDelete(item.id) },
+                    "Delete"
+                  )
                 )
           )
         );
@@ -144,7 +199,11 @@ setTimeout(() => {
         "section",
         { className: "hero" },
         React.createElement("h1", null, "Customers Explorer"),
-        React.createElement("p", { className: "sub" }, "React UI + SQLite API demo")
+        React.createElement(
+          "p",
+          { className: "sub" },
+          "React UI + SQLite API demo"
+        )
       ),
       React.createElement(
         "section",
@@ -179,11 +238,7 @@ setTimeout(() => {
           { className: "meta" },
           `Page ${page} / ${totalPages} · ${total} total`
         ),
-        React.createElement(
-          "ul",
-          { className: "list" },
-          ...listItems
-        ),
+        React.createElement("ul", { className: "list" }, ...listItems),
         React.createElement(
           "div",
           { className: "actions" },
@@ -209,5 +264,7 @@ setTimeout(() => {
     );
   }
 
-  ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    React.createElement(App)
+  );
 }, 100);

@@ -3,7 +3,7 @@
   "buildCommand": "mkdir -p public && cp -r frontend/* public/",
   "outputDirectory": "public",
   "functions": {
-    "api/customers.js": {
+    "api/customers.ts": {
       "includeFiles": "data/customers.db"
     }
   },

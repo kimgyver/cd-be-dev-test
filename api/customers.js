@@ -15,7 +15,7 @@ function getSqlJs() {
 function resolveDbPath() {
   const candidates = [
     path.join(process.cwd(), "data", "customers.db"),
-    path.join(__dirname, "..", "data", "customers.db"),
+    path.join(__dirname, "..", "data", "customers.db")
   ];
 
   for (const candidate of candidates) {
@@ -60,7 +60,10 @@ module.exports = async function handler(req, res) {
     // Handle CORS
     if (req.method === "OPTIONS") {
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET, PUT, DELETE, OPTIONS");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, PUT, DELETE, OPTIONS"
+      );
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");
       res.statusCode = 204;
       res.end();
@@ -69,8 +72,14 @@ module.exports = async function handler(req, res) {
 
     if (req.method === "GET") {
       const url = new URL(req.url, "http://localhost");
-      const page = Math.max(1, parseInt(url.searchParams.get("page") || "1", 10));
-      const limit = Math.min(100, Math.max(1, parseInt(url.searchParams.get("limit") || "20", 10)));
+      const page = Math.max(
+        1,
+        parseInt(url.searchParams.get("page") || "1", 10)
+      );
+      const limit = Math.min(
+        100,
+        Math.max(1, parseInt(url.searchParams.get("limit") || "20", 10))
+      );
       const q = (url.searchParams.get("q") || "").trim();
 
       const db = await getDb();
@@ -97,7 +106,15 @@ module.exports = async function handler(req, res) {
 
       const searchPattern = `%${q}%`;
       if (q) {
-        listStmt.bind([searchPattern, searchPattern, searchPattern, searchPattern, searchPattern, limit, offset]);
+        listStmt.bind([
+          searchPattern,
+          searchPattern,
+          searchPattern,
+          searchPattern,
+          searchPattern,
+          limit,
+          offset
+        ]);
       } else {
         listStmt.bind([limit, offset]);
       }
