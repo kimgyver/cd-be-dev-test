@@ -5,8 +5,7 @@
       "includeFiles": "data/customers.db"
     }
   },
-  "public": "frontend",
-  "buildCommand": "npm run build",
+  "buildCommand": "mkdir -p public && cp -r frontend/* public/",
   "rewrites": [
     {
       "source": "/((?!api).)*",
